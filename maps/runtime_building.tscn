@@ -475,7 +475,6 @@ script = ExtResource("1_5ikex")
 
 [node name="FuncGodotMap" type="Node3D" parent="."]
 script = ExtResource("1_t3u02")
-local_map_file = "res://maps/runtime_building.map"
 map_settings = SubResource("Resource_31b3j")
 
 [node name="Camera3D" type="Camera3D" parent="."]

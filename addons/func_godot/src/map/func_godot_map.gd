@@ -105,8 +105,11 @@ func verify_parameters() -> bool:
 		return false
 	
 	if not FileAccess.file_exists(_map_file_internal):
-		push_error("Error: No such file %s" % _map_file_internal)
-		return false
+		if FileAccess.file_exists(_map_file_internal + ".import"):
+			_map_file_internal = _map_file_internal + ".import"
+		else:
+			push_error("Error: No such file %s" % _map_file_internal)
+			return false
 	
 	return true
 
@@ -276,9 +279,10 @@ func unwrap_uv2(node: Node = null) -> void:
 		print("Unwrapping mesh UV2s")
 	
 	if target_node is MeshInstance3D:
-		var mesh: Mesh = target_node.get_mesh()
-		if mesh is ArrayMesh:
-			mesh.lightmap_unwrap(Transform3D.IDENTITY, map_settings.uv_unwrap_texel_size / map_settings.inverse_scale_factor)
+		if target_node.gi_mode == GeometryInstance3D.GI_MODE_STATIC:
+			var mesh: Mesh = target_node.get_mesh()
+			if mesh is ArrayMesh:
+				mesh.lightmap_unwrap(Transform3D.IDENTITY, map_settings.uv_unwrap_texel_size / map_settings.inverse_scale_factor)
 	
 	for child in target_node.get_children():
 		unwrap_uv2(child)
@@ -754,11 +758,12 @@ func resolve_trenchbroom_group_hierarchy() -> void:
 		
 		# identify parents
 		if '_tb_id' in properties:
+			node.set_meta("_tb_type", properties['_tb_type'])
+			if properties['_tb_type'] == "_tb_group":
+				node.name = "group_" + str(properties['_tb_id'])
+			elif properties['_tb_type'] == "_tb_layer":
+				node.name = "layer_" + str(properties['_tb_layer_sort_index'])
 			if properties['_tb_name'] != "Unnamed":
-				if properties['_tb_type'] == "_tb_group":
-					node.name = "group_" + str(properties['_tb_id'])
-				elif properties['_tb_type'] == "_tb_layer":
-					node.name = "layer_" + str(properties['_tb_layer_sort_index'])
 				node.name = node.name + "_" + properties['_tb_name']
 			parent_entities[node_idx] = node
 	
@@ -816,7 +821,7 @@ func add_children() -> void:
 					add_child_editor(data['parent'], data['node'], data['below'])
 					if data['relative']:
 						if (data['node'] is Node3D and data['parent'] is Node3D) or (data['node'] is Node2D and data['parent'] is Node2D):
-							data['node'].global_position -= data['parent'].global_position
+							data['node'].position -= data['parent'].position
 				continue
 			add_children_complete()
 			return
