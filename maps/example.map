@@ -4,7 +4,7 @@
 {
 "mapversion" "220"
 "classname" "worldspawn"
-"_tb_textures" "textures/special"
+"_tb_textures" "textures/"
 }
 // entity 1
 {

@@ -12,13 +12,9 @@ config_version=5
 
 config/name="FuncGodot Runtime Building"
 config/description="Example project showing how you might set up a project to use FuncGodot."
-run/main_scene="res://maps/runtime_building.tscn"
+run/main_scene="res://maps/command_line_building.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
-
-[autoload]
-
-GAME="*res://game_manager.gd"
 
 [editor_plugins]
 

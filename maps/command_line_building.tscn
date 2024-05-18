@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpqjbjb0tw1ow"]
+
+[ext_resource type="Script" path="res://maps/command_line_building.gd" id="1_3h2di"]
+[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_4toc4"]
+[ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="3_c3ris"]
+
+[sub_resource type="Environment" id="Environment_dqk2j"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="command_line_building" type="Node"]
+script = ExtResource("1_3h2di")
+
+[node name="FuncGodotMap" type="Node3D" parent="."]
+script = ExtResource("2_4toc4")
+map_settings = ExtResource("3_c3ris")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.705846, -0.37954, 0.598106, 0, 0.844347, 0.535797, -0.708366, 0.37819, -0.595978, 7.47103, 9.45742, -7.79337)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dqk2j")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 490.0
+offset_bottom = 115.0
