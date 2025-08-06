@@ -12,8 +12,8 @@ config_version=5
 
 config/name="FuncGodot Runtime Building"
 config/description="Example project showing how you might set up a project to use FuncGodot."
-run/main_scene="res://maps/command_line_building.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="uid://dpqjbjb0tw1ow"
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [editor_plugins]

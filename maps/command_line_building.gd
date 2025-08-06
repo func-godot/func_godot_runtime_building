@@ -1,3 +1,6 @@
+# Please read the FuncGodot Manual chapter on Runtime Building for a full tutorial on command line map building:
+# https://func-godot.github.io/func_godot_docs/FuncGodot%20Manual/pages/tips_runtime_building.html
+
 extends Node
 
 @onready var func_godot_map := $FuncGodotMap as FuncGodotMap

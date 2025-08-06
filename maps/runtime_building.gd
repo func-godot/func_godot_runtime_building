@@ -7,19 +7,11 @@ extends Node
 func _ready():
 	func_godot_map.connect("build_complete", _build_complete)
 	func_godot_map.connect("build_failed", _build_failed)
-	func_godot_map.connect("unwrap_uv2_complete", _unwrap_uv2_complete)
 	func_godot_map.local_map_file = "res://maps/example.map"
-	func_godot_map.verify_and_build()
+	func_godot_map.build()
 
-# We need to wait for the build to finish before unwrapping mesh UV2s for lightmap baking.
-# Currently lightmap baking cannot be performed at runtime, so it's not terribly useful yet.
-# Consider creating a procedural Voxel GI solid class entity that can be baked at runtime instead.
 func _build_complete() -> void:
-	print("Success! Unwrapping UV2...")
-	func_godot_map.unwrap_uv2()
+	print("Map build successful!")
 
 func _build_failed() -> void:
 	printerr("Failed to build the map file! :(")
-
-func _unwrap_uv2_complete() -> void:
-	print("UV2 unwrapping completed!")
