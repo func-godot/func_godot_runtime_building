@@ -15,6 +15,7 @@ config/description="Example project showing how you might set up a project to us
 run/main_scene="uid://dpqjbjb0tw1ow"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+config/tags=PackedStringArray("3d", "func_godot")
 
 [editor_plugins]
 
